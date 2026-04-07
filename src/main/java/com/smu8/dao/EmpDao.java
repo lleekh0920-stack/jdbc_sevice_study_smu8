@@ -23,7 +23,7 @@ public interface EmpDao {
 
     //조회 (상세,전체,부서번호조회,이름검색)
     // Select * From emp Where empno=?
-    List<EmpDto> findAll();
+    List<EmpDto> findAll() throws SQLException;
     EmpDto findByEmpno(int empno);
     List<EmpDto> findByDeptno(int deptno) throws SQLException;
 
