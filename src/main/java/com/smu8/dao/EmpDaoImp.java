@@ -2,10 +2,7 @@ package com.smu8.dao;
 
 import com.smu8.dto.EmpDto;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,8 +63,18 @@ public class EmpDaoImp implements EmpDao{
     }
 
     @Override
-    public EmpDto findByEmpno(int empno) {
-        return null;
+    public EmpDto findByEmpno(int empno) throws SQLException{
+        EmpDto emp=null;
+        String sql="SELECT * FROM EMP WHERE empno=?";
+        PreparedStatement ps=conn.prepareStatement(sql);
+        ps.setInt(1,empno);
+        ResultSet rs=ps.executeQuery();
+        while(rs.next()){
+            emp=parse(rs);
+        }
+
+
+        return emp;
     }
 
     @Override
@@ -79,4 +86,22 @@ public class EmpDaoImp implements EmpDao{
     public List<EmpDto> findByEnameContaining(String ename) throws SQLException {
         return List.of();
     }
+    //ResultSet-> EmpDto (파스: 형변환)
+    //resultSetParseEmpDto
+    public EmpDto parse(ResultSet rs) throws SQLException {
+        EmpDto emp=null;
+        emp=new EmpDto(
+                rs.getInt("empno"),
+                rs.getString("ename"),
+                rs.getString("job"),
+                rs.getObject("mgr", Integer.class),
+                rs.getObject("hiredate", LocalDate.class),
+                rs.getObject("sal", Double.class),
+                rs.getObject("comm", Double.class),
+                rs.getObject("deptno", Integer.class)
+        );
+        return emp;
+    }
+
+
 }
