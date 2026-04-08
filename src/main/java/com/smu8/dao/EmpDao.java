@@ -13,6 +13,11 @@ public interface EmpDao {
     // 수정 => update
     // 삭제 => delete
     // 조회 => select,find(select), by(where) [JPA: 쿼리 결과를 자동매핑해주는 라이브러리]
+
+    //상사를 참조하는 사원의 상사를 없애는 sql
+    int updateMgrToNull(int mgr) throws SQLException;
+
+
     void insert(EmpDto emp) throws SQLException;
     int update(EmpDto emp) throws SQLException;
     //void insert(List<EmpDto> emp);

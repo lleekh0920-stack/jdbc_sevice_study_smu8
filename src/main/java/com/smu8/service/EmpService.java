@@ -31,6 +31,7 @@ public interface EmpService {
 
     //트랜잭션 (오류 발생시 롤백 구현)
     //emp 지우기 전에 pay_history를 먼저 지우고 삭제 (사원을 참조하는 모든 자식테이블 먼저 삭제)
-    void removeEmp(int id);
+    //지워야할 사원이 이미 삭제되었거나 없을때 IllegalArgumentException
+    void removeEmp(int id)throws SQLException, IllegalArgumentException;
 }
 
