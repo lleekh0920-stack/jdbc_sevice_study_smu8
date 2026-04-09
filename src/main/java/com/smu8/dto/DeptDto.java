@@ -5,11 +5,16 @@ public class DeptDto {
     private String dname;// Varchar2(14)
     private String loc; //Varchar2(13)
 
+    public DeptDto(){}
+
     public DeptDto(int deptno, String dname, String loc) {
         this.deptno = deptno;
         this.dname = dname;
         this.loc = loc;
     }
+
+
+
 
     public int getDeptno() {
         return deptno;

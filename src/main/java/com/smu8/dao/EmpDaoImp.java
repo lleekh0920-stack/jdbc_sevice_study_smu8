@@ -130,7 +130,7 @@ public class EmpDaoImp implements EmpDao{
         PreparedStatement ps=conn.prepareStatement(sql);
         ps.setInt(1,empno);
         ResultSet rs=ps.executeQuery();
-        while(rs.next()){
+        if(rs.next()){
             emp=parse(rs);
         }
 
